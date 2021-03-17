@@ -5,4 +5,10 @@ package main.leetcode.hexin;
  * @date 2021-03-10 00:11
  **/
 public class Offer {
+
+    public static void main(String[] args) {
+
+
+
+    }
 }
