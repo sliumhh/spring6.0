@@ -85,9 +85,7 @@ public class LinkedList {
             list.add(head.val);
             head = head.next;
         }
-
-        Integer[] arrs = list.toArray(new Integer[list.size()]);
-
+        Integer[] arrs = list.toArray(new Integer[0]);
         while (left < right) {
             int temp = arrs[left - 1];
             arrs[left - 1] = arrs[right - 1];
