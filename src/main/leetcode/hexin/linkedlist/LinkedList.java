@@ -1,5 +1,8 @@
 package main.leetcode.hexin.linkedlist;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author ezrealhexin
  * @date 2021-03-17 23:44
@@ -7,6 +10,8 @@ package main.leetcode.hexin.linkedlist;
 public class LinkedList {
 
     public static void main(String[] args) {
+
+        ListNode node = createLinkedList();
 
     }
 
@@ -47,48 +52,59 @@ public class LinkedList {
         return pre;
     }
 
-//
-//    /**
-//     * 给你单链表的头节点 head 和两个整数 left 和 right ，其中 left <= right 。
-//     * 请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。
-//     * <p>
-//     * 输入：head = [1,2,3,4,5], left = 2, right = 4
-//     * 输出：[1,4,3,2,5]
-//     * 示例 2：
-//     * 输入：head = [5], left = 1, right = 1
-//     * 输出：[5]
-//     * 提示：
-//     * <p>
-//     * 链表中节点数目为 n
-//     * 1 <= n <= 500
-//     * -500 <= Node.val <= 500
-//     * 1 <= left <= right <= n
-//     */
-//
-//    public ListNode reverseBetween(ListNode head, int left, int right) {
-//
-//        if (head == null) {
-//            return null;
-//        }
-//        if (left == right) {
-//            return head;
-//        }
-//        ListNode pre = null;
-//        ListNode next = null;
-//
-//        while (head != null) {
-//
-//            if (head.val <= left && head.val <= right) {
-//                next = head.next;
-//
-//            } else {
-//                head = head.next;
-//            }
-//        }
-//
-//
-//    }
 
+    /**
+     * 题目: 92. 反转链表 II
+     * <p>
+     * 给你单链表的头指针 head 和两个整数 left 和 right ，其中 left <= right 。
+     * 请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。
+     * <p>
+     * 输入：head = [1,2,3,4,5], left = 2, right = 4
+     * 输出：[1,4,3,2,5]
+     * <p>
+     * 示例 2：
+     * <p>
+     * 输入：head = [5], left = 1, right = 1
+     * 输出：[5]
+     * <p>
+     * 链表中节点数目为 n
+     * 1 <= n <= 500
+     * -500 <= Node.val <= 500
+     * 1 <= left <= right <= n
+     */
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+
+        if (head == null) {
+            return null;
+        }
+        if (left == right) {
+            return head;
+        }
+        List<Integer> list = new ArrayList<>();
+        while (head != null) {
+            list.add(head.val);
+            head = head.next;
+        }
+
+        Integer[] arrs = list.toArray(new Integer[list.size()]);
+
+        while (left < right) {
+            int temp = arrs[left - 1];
+            arrs[left - 1] = arrs[right - 1];
+            arrs[right - 1] = temp;
+            left++;
+            right--;
+        }
+
+        ListNode pre = new ListNode(0);
+        ListNode next = pre;
+        for (int i = 0; i < arrs.length; i++) {
+            ListNode tempNode = new ListNode(arrs[i]);
+            pre.next = tempNode;
+            pre = tempNode;
+        }
+        return next.next;
+    }
 
     /**
      * 题目: 剑指 Offer 06. 从尾到头打印链表
@@ -162,32 +178,4 @@ public class LinkedList {
         return head;
     }
 
-    /**
-     * 输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。
-     *
-     * 例如，一个链表有 6 个节点，从头节点开始，它们的值依次是 1、2、3、4、5、6。这个链表的倒数第 3 个节点是值为 4 的节点。
-     * 示例：
-     *
-     * 给定一个链表: 1->2->3->4->5, 和 k = 2.
-     *
-     * 返回链表 4->5.
-     */
-//    public ListNode getKthFromEnd(ListNode head, int k) {
-//
-//        if (head == null) {
-//            return null;
-//        }
-//        if (k == 0) {
-//            return head;
-//        }
-//        int size = 0;
-//        ListNode pre = null;
-//        ListNode next = null;
-//        while (head != null) {
-//            next = head.next;
-//            head.next = pre;
-//            pre = head;
-//            head = next;
-//        }
-//    }
 }
