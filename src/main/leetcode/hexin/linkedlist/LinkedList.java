@@ -177,4 +177,65 @@ public class LinkedList {
         return head;
     }
 
+
+    /**
+     * 题目 :剑指 Offer 25. 合并两个排序的链表
+     *
+     * 输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。
+     * 示例1：
+     * 输入：1->2->4, 1->3->4
+     * 输出：1->1->2->3->4->4
+     * <
+     * 限制：
+     * 0 <= 链表长度 <= 1000
+     */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+
+        if (l1 == null && l2 == null) {
+            return null;
+        }
+        if (l1 == null) {
+            return l2;
+        }
+        if (l2 == null) {
+            return l1;
+        }
+        int num = 0;
+        ListNode l11 = l1;
+        ListNode l22 = l2;
+
+        while (l11 != null) {
+            num++;
+            l11 = l11.next;
+        }
+
+        while (l22 != null) {
+            num++;
+            l22 = l22.next;
+        }
+        int[] a = new int[num];
+
+        int size = 0;
+
+        while (l1 != null) {
+            a[size] = l1.val;
+            size++;
+            l1 = l1.next;
+        }
+        while (l2 != null) {
+            a[size] = l2.val;
+            size++;
+            l2 = l2.next;
+        }
+        Arrays.sort(a);
+        ListNode pre = new ListNode(0);
+        ListNode next = pre;
+        for (int i = 0; i < a.length; i++) {
+            ListNode temp = new ListNode(a[i]);
+            pre.next = temp;
+            pre = temp;
+        }
+        return next.next;
+    }
+
 }
