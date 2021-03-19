@@ -191,9 +191,6 @@ public class LinkedList {
      */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 
-        if (l1 == null && l2 == null) {
-            return null;
-        }
         if (l1 == null) {
             return l2;
         }
@@ -203,20 +200,16 @@ public class LinkedList {
         int num = 0;
         ListNode l11 = l1;
         ListNode l22 = l2;
-
         while (l11 != null) {
             num++;
             l11 = l11.next;
         }
-
         while (l22 != null) {
             num++;
             l22 = l22.next;
         }
         int[] a = new int[num];
-
         int size = 0;
-
         while (l1 != null) {
             a[size] = l1.val;
             size++;
