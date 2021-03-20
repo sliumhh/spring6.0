@@ -1,4 +1,4 @@
-package main.leetcode.wawa.listnode;
+package main.leetcode.model;
 
 /**
  * 功能描述:

@@ -1,5 +1,7 @@
 package main.leetcode.wawa.listnode;
 
+import main.leetcode.model.ListNode;
+
 import java.util.HashMap;
 import java.util.Map;
 
