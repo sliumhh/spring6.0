@@ -2,7 +2,9 @@ package main.leetcode.hexin;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author ezrealhexin
@@ -115,41 +117,13 @@ public class Hot {
      * 此处可以运用第3条性质,因为只有一个元素出现一次,那么把数组所有元素进行异或运算,结果返回的就是只出现一次的元素
      */
 
-
     public int singleNumber(int[] nums) {
-
-//        Map<Integer, Integer> map = new HashMap<>();
-//        for (int i = 0; i < nums.length; i++) {
-//            if (map.containsKey(nums[i])) {
-//                Integer value = map.get(nums[i]);
-//                value++;
-//                map.put(nums[i], value);
-//            }else {
-//                map.put(nums[i], 1);
-//            }
-//        }
-//        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-//            if (entry.getValue() == 1) {
-//                return entry.getKey();
-//            }
-//        }
-//        return 0;
         int single = 0;
         for (int num : nums) {
             single ^= num;
         }
         return single;
     }
-
-    /**
-     * 题目: 移动零
-     *
-     * 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
-     */
-    public void moveZeroes(int[] nums) {
-
-    }
-
 
     /**
      * 题目: 多数元素
@@ -162,47 +136,31 @@ public class Hot {
      *      2 用map记数
      */
     public int majorityElement(int[] nums) {
-//        Map<Integer, Integer> map = new HashMap<>();
-//        for (int i = 0; i < nums.length; i++) {
-//            if (map.containsKey(nums[i])) {
-//                Integer value = map.get(nums[i]);
-//                value++;
-//                map.put(nums[i], value);
-//            } else {
-//                map.put(nums[i], 1);
-//            }
-//        }
-//        int max = nums[0];
-//        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-//            if (entry.getValue() > map.get(max)) {
-//                max = entry.getKey();
-//            }
-//        }
-//        return max;
-
-//        Map<Integer, Integer> map = new HashMap<>();
-//        int maxValue = Integer.MIN_VALUE;
-//        int maxIndex = 0;
-//        for (int i = 0; i < nums.length; i++) {
-//            Integer aDefault = map.getOrDefault(nums[i], 0);
-//            map.put(nums[i], ++aDefault);
-//            if (aDefault > maxValue) {
-//                maxIndex = i;
-//                maxValue = aDefault;
-//            }
-//        }
-//        return nums[maxIndex];
         Arrays.sort(nums);
         return nums[nums.length >> 1];
     }
 
-//    /**
-//     *
-//     * 题目:
-//     *
-//     */
-//    public int missingNumber(int[] nums) {
-//
-//    }
+    /**
+     * 题目: 剑指 Offer 03. 数组中重复的数字
+     * <p>
+     * 找出数组中重复的数字。
+     * 在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。
+     * 请找出数组中任意一个重复的数字。
+     * 示例 1：
+     * 输入：
+     * [2, 3, 1, 0, 2, 5, 3]
+     * 输出：2 或 3
+     */
+    public int findRepeatNumber(int[] nums) {
+
+        Set<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            if (!set.add(nums[i])) {
+                return nums[i];
+            }
+        }
+        return  -1;
+    }
 
 }
