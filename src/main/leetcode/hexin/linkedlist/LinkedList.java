@@ -15,6 +15,7 @@ public class LinkedList {
     public static void main(String[] args) {
 
         ListNode node = createLinkedList();
+        getKthFromEnd(node,2);
 
     }
 
@@ -207,46 +208,6 @@ public class LinkedList {
         }
         cur.next = l1 != null ? l1 : l2;
         return node.next;
-
-
-//        if (l1 == null) {
-//            return l2;
-//        }
-//        if (l2 == null) {
-//            return l1;
-//        }
-//        int num = 0;
-//        ListNode l11 = l1;
-//        ListNode l22 = l2;
-//        while (l11 != null) {
-//            num++;
-//            l11 = l11.next;
-//        }
-//        while (l22 != null) {
-//            num++;
-//            l22 = l22.next;
-//        }
-//        int[] a = new int[num];
-//        int size = 0;
-//        while (l1 != null) {
-//            a[size] = l1.val;
-//            size++;
-//            l1 = l1.next;
-//        }
-//        while (l2 != null) {
-//            a[size] = l2.val;
-//            size++;
-//            l2 = l2.next;
-//        }
-//        Arrays.sort(a);
-//        ListNode pre = new ListNode(0);
-//        ListNode next = pre;
-//        for (int i = 0; i < a.length; i++) {
-//            ListNode temp = new ListNode(a[i]);
-//            pre.next = temp;
-//            pre = temp;
-//        }
-//        return next.next;
     }
 
 
@@ -258,9 +219,22 @@ public class LinkedList {
      * 给定一个链表: 1->2->3->4->5, 和 k = 2.
      * 返回链表 4->5.
      */
-    public ListNode getKthFromEnd(ListNode head, int k) {
+    public static ListNode getKthFromEnd(ListNode head, int k) {
 
-        return new ListNode(2);
+        if (head == null) {
+            return null;
+        }
+        ListNode l1 = head;
+        ListNode l2 = head;
+        int num = 1;
+        while (l1 != null && l2 != null) {
+            l1 = l1.next;
+            if (num > k) {
+                l2 = l2.next;
+            }
+            num++;
+        }
+        return l2;
     }
 
 }
