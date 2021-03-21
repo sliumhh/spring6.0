@@ -3,7 +3,6 @@ package main.leetcode.hexin.linkedlist;
 import main.leetcode.model.ListNode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
