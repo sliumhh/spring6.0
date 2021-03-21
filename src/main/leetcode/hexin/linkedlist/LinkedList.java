@@ -15,7 +15,7 @@ public class LinkedList {
     public static void main(String[] args) {
 
         ListNode node = createLinkedList();
-        getKthFromEnd(node,2);
+        removeElements(node,2);
 
     }
 
@@ -28,10 +28,12 @@ public class LinkedList {
         ListNode node3 = new ListNode(3);
         ListNode node4 = new ListNode(4);
         ListNode node5 = new ListNode(5);
+        ListNode node6 = new ListNode(2);
         node1.next = node2;
         node2.next = node3;
         node3.next = node4;
         node4.next = node5;
+        node5.next = node6;
         return node1;
     }
 
@@ -180,6 +182,29 @@ public class LinkedList {
         return head;
     }
 
+    /**
+     * 题目: 203. 移除链表元素
+     * 给你一个链表的头节点 head 和一个整数 val ，请你删除链表中所有满足 Node.val == val 的节点，并返回 新的头节点
+     * 输入：head = [1,2,6,3,4,5,6], val = 6
+     * 输出：[1,2,3,4,5]
+     */
+    public static ListNode removeElements(ListNode head, int val) {
+        ListNode sentinel = new ListNode(0);
+        sentinel.next = head;
+
+        ListNode prev = sentinel;
+        ListNode curr = head;
+        while (curr != null) {
+            if (curr.val == val) {
+                prev.next = curr.next;
+            } else {
+                prev = curr;
+            }
+            curr = curr.next;
+        }
+        return sentinel.next;
+    }
+
 
     /**
      * 题目 :剑指 Offer 25. 合并两个排序的链表
@@ -236,5 +261,4 @@ public class LinkedList {
         }
         return l2;
     }
-
 }
