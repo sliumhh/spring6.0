@@ -1,10 +1,15 @@
 package main.leetcode.hexin;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author ezrealhexin
@@ -15,10 +20,9 @@ public class Hot {
 
     public static void main(String[] args) {
 
-        int[] arrays = new int[]{4, 1, 2, 1, 2};
+        int[] ints = new int[]{4, 3, 2, 7, 8, 2, 3, 1};
 
-
-        swap(1,3);
+        findDisappearedNumbers(ints);
 
     }
 
@@ -161,6 +165,50 @@ public class Hot {
             }
         }
         return  -1;
+    }
+
+    /**
+     * 给定一个范围在  1 ≤ a[i] ≤ n ( n = 数组大小 ) 的 整型数组，数组中的元素一些出现了两次，另一些只出现一次。
+     * 找到所有在 [1, n] 范围之间没有出现在数组中的数字。
+     * 您能在不使用额外空间且时间复杂度为O(n)的情况下完成这个任务吗? 你可以假定返回的数组不算在额外空间内。
+     * 示例:
+     * 输入:
+     * [4,3,2,7,8,2,3,1]
+     *
+     * 输出:
+     * [5,6]
+     */
+    public static List<Integer> findDisappearedNumbers(int[] nums) {
+        List<Integer> list = new ArrayList<>();
+        int[] intArr = new int[nums.length + 1];
+        for (int i = 0; i < nums.length; i++) {
+            intArr[nums[i]] = 1;
+        }
+        for (int i = 1; i < intArr.length; i++) {
+            if (intArr[i]==0){
+                list.add(i);
+            }
+        }
+        return list;
+
+//        Set<Integer> set =new HashSet<>();
+//        Set<Integer> set1 = new HashSet<>();
+//        for (int i = 0; i <= nums.length; i++) {
+//            if (i > 0) {
+//                set.add(i);
+//            }
+//            if (i < nums.length){
+//                set1.add(nums[i]);
+//            }
+//        }
+//        List<Integer> list = new ArrayList<>(set1);
+//
+//        for (int i = 0; i < list.size(); i++) {
+//            if (!set.add(list.get(i))){
+//                set.remove(list.get(i));
+//            }
+//        }
+//       return new ArrayList<>(set);
     }
 
 }
