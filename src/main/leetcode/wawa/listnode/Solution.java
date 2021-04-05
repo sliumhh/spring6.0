@@ -2,6 +2,8 @@ package main.leetcode.wawa.listnode;
 
 import main.leetcode.model.ListNode;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +14,74 @@ import java.util.Map;
  * @date 2021/3/17 8:33 下午
  */
 public class Solution {
+    public static void main(String[] args) {
+        ListNode node1 = new ListNode(1);
+        ListNode node2 = new ListNode(2);
+        ListNode node3 = new ListNode(3);
+        ListNode node4 = new ListNode(3);
+        ListNode node5 = new ListNode(5);
+        ListNode node6 = new ListNode(6);
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node5;
+        node5.next = node6;
+        ListNode node = removeElements(node1, 3);
+        printListNode(node);
+    }
+
+    public ListNode removeElements(ListNode head, int val) {
+        if (head == null) return head;
+        head.next = removeElements(head.next, val);
+        return head.val == val ? head.next : head;
+    }
+
+    public static ListNode removeElementsLoop(ListNode head, int val) {
+        if (head == null) return null;
+        ListNode dump = new ListNode(-1);
+        dump.next = head;
+        ListNode cur = dump;
+        while (cur.next != null) {
+            if (cur.next.val == val) {
+                cur.next = cur.next.next;
+            } else {
+                cur = cur.next;
+            }
+        }
+        return dump.next;
+    }
+
+
+    public static ListNode revertPart(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dump = new ListNode(-1);
+        dump.next = head;
+        ListNode cur = dump;
+        while (cur.next != null && cur.next.next != null) {
+            ListNode next1 = cur.next;
+            ListNode next2 = next1.next;
+            cur.next = next2;
+
+            ListNode temp = next2.next;
+            next2.next = next1;
+            next1.next = temp;
+
+            cur = next1;
+            printListNode(dump);
+        }
+        return dump.next;
+    }
+
+
+    public static void printListNode(ListNode head) {
+        while (head != null) {
+            System.out.print(head.val + "->");
+            head = head.next;
+        }
+        System.out.println();
+    }
 
     /**
      * 请实现 copyRandomList 函数，复制一个复杂链表。
