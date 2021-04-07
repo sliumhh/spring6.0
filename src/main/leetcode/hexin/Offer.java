@@ -3,8 +3,13 @@ package main.leetcode.hexin;
 import main.leetcode.model.ListNode;
 import main.leetcode.model.Node;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author ezrealhexin
@@ -13,12 +18,6 @@ import java.util.Map;
 public class Offer {
 
     public static void main(String[] args) {
-//        ListNode node = createLinkedList();
-////        ListNode listNode = copyNode(node);
-////        while (listNode!=null){
-////            System.out.println(listNode.val);
-////            listNode =listNode.next;
-//        }
 
     }
 
@@ -168,4 +167,151 @@ public class Offer {
         return node1.next;
     }
 
+    /**
+     * 输入整数数组 arr ，找出其中最小的 k 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，
+     * 则最小的4个数字是1、2、3、4。
+     * <p>
+     * 示例 1：
+     * <p>
+     * 输入：arr = [3,2,1], k = 2
+     * 输出：[1,2] 或者 [2,1]
+     * <p>
+     * 示例 2：
+     * <p>
+     * 输入：arr = [0,1,2,1], k = 1
+     * 输出：[0]
+     */
+    public int[] getLeastNumbers(int[] arr, int k) {
+        int[] ints = new int[k];
+        Arrays.sort(arr);
+        for (int i = 0; i < arr.length; i++) {
+            if (i == k) {
+                break;
+            }
+            ints[i] = arr[i];
+        }
+        return ints;
+    }
+
+
+    /**
+     * 输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。
+     * 例如输入字符串"I am a student. "，则输出"student. a am I"。
+     * 示例 1：
+     * 输入: "the sky is blue"
+     * 输出: "blue is sky the"
+     * 示例 2：
+     * 输入: "  hello world!  "
+     * 输出: "world! hello"
+     * 解释: 输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。
+     * 示例 3：
+     * 输入: "a good   example"
+     * 输出: "example good a"
+     * 解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。
+     */
+    public static String reverseWords(String s) {
+        String[] s1 = s.split(" ");
+        StringBuilder stringBuilder = new StringBuilder();
+        List<String> list = new ArrayList<>();
+        for (int i = s1.length - 1; i >= 0; i--) {
+            if (!"".equals(s1[i])) {
+                list.add(s1[i]);
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            if (!"".equals(list.get(i))) {
+                if (i == list.size() - 1) {
+                    stringBuilder.append(list.get(i));
+                } else {
+                    stringBuilder.append(list.get(i)).append(" ");
+                }
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
+     * 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+     * 示例 1:
+     * 输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]
+     * 输出: 2
+     */
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
+
+    /**
+     * 从扑克牌中随机抽5张牌，判断是不是一个顺子，即这5张牌是不是连续的。2～10为数字本身，
+     * A为1，J为11，Q为12，K为13，而大、小王为 0 ，可以看成任意数字。A 不能视为 14。
+     * 示例 1:
+     * 输入: [1,2,3,4,5]
+     * 输出: True
+     * 示例 2:
+     * 输入: [0,0,1,2,5]
+     * 输出: True
+     */
+    public boolean isStraight(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        int min = 14;
+        int max = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                continue;
+            }
+            if (nums[i] < min) {
+                min = nums[i];
+            }
+            if (nums[i] > max) {
+                max = nums[i];
+            }
+            if (!set.add(nums[i])) {
+                return false;
+            }
+        }
+        return max - min < 5;
+    }
+
+    /**
+     * 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分。
+     * 输入：nums = [1,2,3,4]
+     * 输出：[1,3,2,4]
+     * 注：[3,1,2,4] 也是正确的答案之一。
+     */
+    public int[] exchange(int[] nums) {
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] % 2 == 0) {
+                list2.add(nums[i]);
+            } else {
+                list1.add(nums[i]);
+            }
+        }
+        list1.addAll(list2);
+
+        for (int i = 0; i < nums.length; i++) {
+
+            nums[i] = list1.get(i);
+        }
+        return nums;
+    }
+
+    /**
+     * 把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转，
+     * 输出旋转数组的最小元素。例如，数组 [3,4,5,1,2] 为 [1,2,3,4,5] 的一个旋转，该数组的最小值为1。
+     * 示例 1：
+     * 输入：[3,4,5,1,2]
+     * 输出：1
+     * 示例 2：
+     * 输入：[2,2,2,0,1]
+     * 输出：0
+     */
+    public int minArray(int[] numbers) {
+
+        Arrays.sort(numbers);
+        return numbers[0];
+    }
 }
