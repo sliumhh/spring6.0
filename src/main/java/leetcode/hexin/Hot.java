@@ -1,4 +1,4 @@
-package main.leetcode.hexin;
+package leetcode.hexin;
 
 import java.util.ArrayList;
 import java.util.Arrays;

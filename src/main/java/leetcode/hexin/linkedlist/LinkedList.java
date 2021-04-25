@@ -1,4 +1,4 @@
-package main.leetcode.hexin.linkedlist;
+package leetcode.hexin.linkedlist;
 
 import main.leetcode.model.ListNode;
 
