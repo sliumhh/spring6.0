@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,18 +18,6 @@ import java.util.Set;
 public class Offer {
 
     public static void main(String[] args) {
-
-        LinkedHashSet<String> s = new LinkedHashSet<>();
-        s.add("a");
-        s.add("b");
-        s.add("c");
-        Iterator i = s.iterator();
-        while (i.hasNext()) {
-            System.out.println(i.next());
-        }
-
-
-
     }
 
     /**
@@ -334,14 +320,25 @@ public class Offer {
      * F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
      * 斐波那契数列由 0 和 1 开始，之后的斐波那契数就是由之前的两数相加而得出。
      * 答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
-     * 示例 1：
-     * 输入：n = 2
-     * 输出：1
-     * 示例 2：
-     * 输入：n = 5
-     * 输出：5
+     * 示例 1：输入：n = 2,输出：1
+     * 示例 2：输入：n = 5,输出：5
+     * <p>
+     * 0 1 1
      */
-//    public int fib(int n) {
-//
-//    }
+    public int fib(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        int[] fib = new int[n + 1];
+        fib[0] = 0;
+        fib[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            fib[i] = fib[i - 1] + fib[i - 2];
+            fib[i] = fib[i] % 1000000007;
+        }
+        return fib[n];
+    }
 }
