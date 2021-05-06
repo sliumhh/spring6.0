@@ -1,6 +1,7 @@
-package main.leetcode.wawa.listnode;
+package main.wawa.listnode;
 
 import main.leetcode.model.ListNode;
+import main.leetcode.wawa.listnode.Node;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -324,7 +324,6 @@ public class Offer {
      * 答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
      * 示例 1：输入：n = 2,输出：1
      * 示例 2：输入：n = 5,输出：5
-     * <p>
      * 0 1 1
      */
     public int fib(int n) {
@@ -360,5 +359,54 @@ public class Offer {
             fib[i] = fib[i] % 1000000007;
         }
         return fib[n];
+    }
+
+    /**
+     * 统计一个数字在排序数组中出现的次数。
+     * 示例 1:
+     * 输入: nums = [5,7,7,8,8,10], target = 8
+     * 输出: 2
+     * 示例 2:
+     * 输入: nums = [5,7,7,8,8,10], target = 6
+     * 输出: 0
+     */
+    public int search(int[] nums, int target) {
+        if (nums.length == 0 || target < nums[0] || target > nums[nums.length - 1]) {
+            return 0;
+        }
+        int count = 0;
+        int record = -1;
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] == target) {
+                record = mid;
+                break;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        if (record == -1) {
+            return 0;
+        } else {
+            for (int i = record; i < nums.length; i++) {
+                if (nums[i] == target) {
+                    count++;
+                } else {
+                    break;
+                }
+            }
+            for (int i = record; i >= 0; i--) {
+                if (nums[i] == target) {
+                    count++;
+                } else {
+                    break;
+                }
+            }
+            return count - 1;
+        }
     }
 }
