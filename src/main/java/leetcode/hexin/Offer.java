@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,7 +20,7 @@ public class Offer {
 
     public static void main(String[] args) {
 
-        System.out.println(0 % 1000000007);
+        int[] a = new int[]{1, 2, -1, -2, 2, 1, -2, 1, 4, -5, 4};
     }
 
     /**
@@ -408,5 +409,70 @@ public class Offer {
             }
             return count - 1;
         }
+    }
+
+
+    /**
+     * 在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。
+     * 示例:
+     * s = "abaccdeff"
+     * 返回 "b"
+     * s = ""
+     * 返回 " "
+     */
+    public char firstUniqChar(String s) {
+        Map<Character, Boolean> map = new LinkedHashMap<>();
+        char[] chars = s.toCharArray();
+        for (char c : chars) {
+            map.put(c, !map.containsKey(c));
+        }
+        for (Map.Entry<Character, Boolean> d : map.entrySet()) {
+            if (d.getValue()) {
+                return d.getKey();
+            }
+        }
+        return ' ';
+    }
+
+
+    /**
+     * 求 1+2+...+n ，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。
+     * 示例 1：
+     * 输入: n = 3
+     * 输出: 6
+     * 示例 2：
+     * 输入: n = 9
+     * 输出: 45
+     */
+    public int sumNums(int n) {
+        if (n == 1) {
+            return n;
+        }
+        return n + sumNums(n - 1);
+    }
+
+
+    /**
+     * 在一个数组 nums 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。
+     * 示例 1：
+     * 输入：nums = [3,4,3,3]
+     * 输出：4
+     * 示例 2：
+     * 输入：nums = [9,1,7,9,7,9,7]
+     * 输出：1
+     */
+    public int singleNumber(int[] nums) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        for (int num : nums) {
+            if (map.get(num) == 1) {
+                return num;
+            }
+        }
+        return -1;
     }
 }
