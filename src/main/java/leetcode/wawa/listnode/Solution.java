@@ -1,9 +1,8 @@
-package main.leetcode.wawa.listnode;
+package leetcode.wawa.listnode;
 
 import main.leetcode.model.ListNode;
+import main.leetcode.wawa.listnode.Node;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
